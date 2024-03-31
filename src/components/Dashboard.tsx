@@ -198,7 +198,7 @@ const Dashboard = () => {
                       </Link>
                       <div className="title">
                         <h2 className="text-3xl md:text-6xl text-black font-bold hover:text-gray-500">
-                          Your Heading
+                          Heading
                         </h2>
                       </div>
                       <p className="text-lg text-gray-600 md:text-xl">
