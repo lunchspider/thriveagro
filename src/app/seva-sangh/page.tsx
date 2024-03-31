@@ -20,7 +20,7 @@ const formSchema = z.object({
     date: z.date(),
 });
 
-export default function() {
+export default function SevaSangh() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
