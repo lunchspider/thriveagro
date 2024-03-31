@@ -24,15 +24,15 @@ const Sidebar = () => {
             Home
           </Link>
         </div>
-        <div className="sideitem">
+        {/* <div className="sideitem">
           <Store color="#FFFFFF" />
           <Link href={"/inventory"} className="sideitem">
             Inventory
           </Link>
-        </div>
+        </div> */}
         <div className="sideitem">
           <BadgeAlert color="#FFFFFF" />
-          <Link href={"/problem"} className="sideitem">
+          <Link href={"/seva-sangh"} className="sideitem">
             Report an Issue
           </Link>
         </div>

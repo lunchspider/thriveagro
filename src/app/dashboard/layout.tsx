@@ -20,7 +20,6 @@ export default function RootLayout({
           )}
         >
           <Dashboard />
-          <Buyer />
           {children}
         </div>
       </div>
