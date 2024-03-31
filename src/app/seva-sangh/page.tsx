@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { z } from 'zod';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { create_complain } from "@/actions/complains";
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -30,8 +31,9 @@ export default function() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
+        await create_complain(values);
     }
 
     return (

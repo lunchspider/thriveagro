@@ -48,8 +48,10 @@ export type Order = typeof orders.$inferSelect;
 export const complains = pgTable('complains', {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text('name').notNull(),
+  issue: text('issue').notNull(),
   location: text('location').notNull(),
-  date: date('date').notNull(),
+  date: date('date', { mode: 'date' }).notNull(),
 });
 
 export type Complain = typeof complains.$inferSelect;
+export type NewComplain = typeof complains.$inferInsert;
