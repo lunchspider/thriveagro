@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 // import ProjectDetails from "@/components/ProjectDetails";
 import { getUser } from "@/actions/user";
@@ -11,14 +10,18 @@ import { AddProduct } from "@/components/AddProducts";
 import ProductDetails from "@/components/ProductDetails";
 import { Inventory } from "@/db/schema";
 
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -53,82 +56,22 @@ export default async function Page() {
         </header>
         <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
           <div className="max-w-6xl w-full mx-auto flex items-center gap-4">
-            {/* <Dialog>
-              <DialogTrigger>Open</DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Are you absolutely sure?</DialogTitle>
-                  <DialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog> */}
-            <AddProduct user_id={user.id} />
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button>Add Product</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <div className="flex justify-center">
+                  <AddProduct user_id={user.id} />
+                </div>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
-          <div>
+          <div className="flex gap-3">
             {userProducts.map((product: Inventory, index: number) => {
               return <ProductDetails details={product} key={index} />;
             })}
           </div>
-          {/* {user.role === "mentor" ? (
-            <Tabs
-              defaultValue="allproject"
-              className=" flex justify-center flex-col w-full max-w-6xl mx-auto gap-5"
-            >
-              <TabsList>
-                <TabsTrigger value="allproject" className={"w-1/2"}>
-                  All projects
-                </TabsTrigger>
-                <TabsTrigger value="mentorProject" className={"w-1/2"}>
-                  my projects
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="allproject">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-                  {all_project_ids.map((id, index) => {
-                    return (
-                      <ProjectDetails
-                        userDetails={user}
-                        project_id={id.id}
-                        key={index}
-                      />
-                    );
-                  })}
-                </div>
-              </TabsContent>
-              <TabsContent value="mentorProject">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-                  {project_ids.length != 0 ? (
-                    project_ids.map((id, index) => {
-                      return (
-                        <ProjectDetails
-                          userDetails={user}
-                          project_id={id.id}
-                          key={index}
-                        />
-                      );
-                    })
-                  ) : (
-                    <p className="text-center">No projects found</p>
-                  )}
-                </div>
-              </TabsContent>
-            </Tabs>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto">
-              {project_ids.map((id, index) => {
-                return (
-                  <ProjectDetails
-                    userDetails={user}
-                    project_id={id.id}
-                    key={index}
-                  />
-                );
-              })}
-            </div>
-          )} */}
         </main>
       </div>
     </>

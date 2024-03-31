@@ -16,13 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import {
   Form,
   FormDescription,
@@ -66,6 +60,7 @@ export function AddProduct({ user_id }: { user_id: string }) {
     console.log(data);
     const addingProduct = await add_product_in_inventry(data);
     console.log(addingProduct);
+    window.location.reload();
   }
 
   return (
@@ -140,10 +135,6 @@ export function AddProduct({ user_id }: { user_id: string }) {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
     </Card>
   );
 }
