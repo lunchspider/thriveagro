@@ -5,14 +5,17 @@ import { redirect } from "next/navigation";
 
 export default function ProductDetails({ details }: { details: Inventory }) {
   return (
-    <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
+    <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden mx-auto">
       <div className="px-4 py-5 sm:p-6">
         <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
           {details.name}
         </h2>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          {details.amount} in stock
-        </p>
+        <div className="flex justify-between">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            {details.amount} in stock
+          </p>
+          <div className="font-bold text-2xl">₹ {details.cost}/-</div>
+        </div>
       </div>
       <div className="border-t border-gray-200 dark:border-gray-700">
         <dl>
@@ -25,13 +28,7 @@ export default function ProductDetails({ details }: { details: Inventory }) {
                 {details.in_stock ? "In Stock" : "Out of Stock"}
               </span>
             </dd>
-            {/* <Link
-              href={`/project/${project.id}/${
-                userDetails.role === "mentor" ? "feedback" : "description"
-              }`}
-            >
-              <Button className="w-32 mt-3">View Project</Button>
-            </Link> */}
+            <Button className="w-32 mt-3">Buy Product</Button>
           </div>
         </dl>
       </div>

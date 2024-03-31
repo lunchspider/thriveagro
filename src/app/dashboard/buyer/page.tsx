@@ -9,24 +9,12 @@ import { get_products_in_inventry } from "@/actions/inventry";
 import { AddProduct } from "@/components/AddProducts";
 import ProductDetails from "@/components/ProductDetails";
 import { Inventory } from "@/db/schema";
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+import Dashboard from "@/components/Dashboard";
 
 export default async function Page() {
   const products = await get_products_in_inventry();
   return (
-    <div className="flex flex-col w-full min-h-screen">
+    <div className="flex flex-col ">
       <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
         <Link
           className="flex items-center gap-2 text-lg font-semibold sm:text-base mr-4"
@@ -40,11 +28,10 @@ export default async function Page() {
             Product
           </Link>
         </nav>
-        <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          {/* <Profile userdetails={user} /> */}
-        </div>
       </header>
-      <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
+      <Dashboard />
+      <main className="flex  bg-gray-100/40 flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
+        <div className="text-center text-xl font-bold">products in Stock</div>
         <div className="flex gap-3">
           {products.map((product: Inventory, index: number) => {
             return <ProductDetails details={product} key={index} />;
