@@ -30,7 +30,7 @@
 }
 
 .buyerPage .card {
-  background-color: rgb(201, 84, 84); /* Semi-transparent black background */
+  background-color: #9e6828; /* Semi-transparent black background */
   padding: 15px;
   border-radius: 5px;
   margin: 10px;
@@ -54,8 +54,8 @@
 }
 
 .buyerPage .card button {
-  background-color: #007bff; /* Blue button color */
-  color: white;
+  background-color: #a9a9a9; /* Blue button color */
+  color: black;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
