@@ -44,7 +44,7 @@ export default async function Page() {
                 </div>
             </>}
             {data.map((x) => {
-                return <div className="flex flex-wrap bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
+                return <div className="flex flex-wrap bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden max-w-md mx-auto" key = {x.id}>
                     <div className="px-4 py-5 sm:p-6">
                         <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
                             {x.issue}
