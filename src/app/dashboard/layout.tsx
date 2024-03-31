@@ -1,5 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import { cn } from "@/lib/utils";
+import Dashboard from "@/components/Dashboard";
+import Buyer from "@/components/buyer";
 
 export default function RootLayout({
   children,
@@ -17,6 +19,8 @@ export default function RootLayout({
             "min-h-screen bg-background font-sans w-[1220px] antialiased"
           )}
         >
+          <Dashboard />
+          <Buyer />
           {children}
         </div>
       </div>
