@@ -5,6 +5,15 @@ import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
 import { signup } from "@/actions/user";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface userDetails {
   email: string;
@@ -14,12 +23,13 @@ interface userDetails {
 }
 
 const Page = () => {
-  const [userDetails, setUserDetails] = useState({
+  const [userDetails, setUserDetails] = useState<userDetails>({
     email: "",
     password_hash: "",
     name: "",
     user_type: "",
   });
+
   useEffect(() => {
     console.log(userDetails);
   }, [userDetails]);
@@ -133,37 +143,25 @@ const Page = () => {
             </div>
           </div>
           <div>
-            <div></div>
-            <div className="dropdown">
-              <div tabIndex={0} role="button" className="btn m-1">
-                {userDetails.user_type ? userDetails.user_type : "Select Role"}
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li
-                  onClick={() => {
-                    setUserDetails({
-                      ...userDetails,
-                      user_type: "Buyer",
-                    });
-                  }}
-                >
-                  <a>Buyer</a>
-                </li>
-                <li
-                  onClick={() => {
-                    setUserDetails({
-                      ...userDetails,
-                      user_type: "Seller",
-                    });
-                  }}
-                >
-                  <a>Seller</a>
-                </li>
-              </ul>
-            </div>
+            <Select
+              onValueChange={(e: string) => {
+                setUserDetails({
+                  ...userDetails,
+                  user_type: e,
+                });
+              }}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Role</SelectLabel>
+                  <SelectItem value="buyer">Buyer</SelectItem>
+                  <SelectItem value="seller">Seller</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
 
           <div>
