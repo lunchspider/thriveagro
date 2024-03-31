@@ -5,10 +5,12 @@ import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
 import { login } from "@/actions/user";
+import { User } from "@/db/schema";
 
-interface userDetails {
-  email: string;
-  password_hash: string;
+interface response {
+  token: undefined | string;
+  success: boolean;
+  user_type: string;
 }
 
 const Page = () => {
@@ -24,14 +26,14 @@ const Page = () => {
   async function onSubmit() {
     try {
       console.log(userDetails);
-      const res = await login(userDetails);
+      const res: response = await login(userDetails);
       console.log(res);
       if (!res.success) {
         alert("Incorrect Username and password");
       } else {
-        if (res.user.user_type === "Buyer") {
+        if (res.user_type === "buyer") {
           window.location.href = "/dashboard/buyer";
-        } else if (res.user.user_type === "Seller") {
+        } else if (res.user_type === "seller") {
           window.location.href = "/dashboard/seller";
         }
       }

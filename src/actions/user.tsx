@@ -34,7 +34,7 @@ export async function signup(data: {
 
     const fifteenMinutesInMs = 15 * 60 * 1000;
 
-    const token = encode(
+    const token: string = encode(
       {
         ...user,
         issued: Date.now(),
@@ -52,8 +52,9 @@ export async function signup(data: {
     });
 
     return {
+      success: true,
       token,
-      user,
+      user_type: user.user_type,
     };
   } catch (e: any) {
     console.log(e);
@@ -88,13 +89,14 @@ export async function login(data: { email: string; password_hash: string }) {
     if (result.length == 0) {
       return {
         success: false,
-        msg: "Incorrect Username and password",
+        token: "",
+        user_type: "",
       };
     }
 
     const user = result[0];
 
-    const token = encode(
+    const token: string = encode(
       {
         ...user,
         issued: Date.now(),
@@ -113,7 +115,7 @@ export async function login(data: { email: string; password_hash: string }) {
     return {
       success: true,
       token,
-      user,
+      user_type: user.user_type,
     };
   } catch (e: any) {
     console.log(e);

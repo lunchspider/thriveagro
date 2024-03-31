@@ -21,6 +21,11 @@ interface userDetails {
   name: string;
   user_type: string;
 }
+interface response {
+  token: undefined | string;
+  success: boolean;
+  user_type: string;
+}
 
 const Page = () => {
   const [userDetails, setUserDetails] = useState<userDetails>({
@@ -37,12 +42,12 @@ const Page = () => {
   async function onSubmit() {
     try {
       console.log(userDetails);
-      const res = await signup(userDetails);
+      const res: response = await signup(userDetails);
       console.log(res);
-      console.log(res.user.user_type);
-      if (res.user.user_type === "Buyer") {
+
+      if (res.user_type === "buyer") {
         window.location.href = "/dashboard/buyer";
-      } else if (res.user.user_type === "Seller") {
+      } else if (res.user_type === "seller") {
         window.location.href = "/dashboard/seller";
       }
     } catch (e) {

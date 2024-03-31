@@ -58,7 +58,7 @@ export default async function Page() {
           <div className="max-w-6xl w-full mx-auto flex items-center gap-4">
             <AlertDialog>
               <AlertDialogTrigger>
-                <Button>Add Product</Button>
+                <Button variant="outline">Add Product</Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <div className="flex justify-center">

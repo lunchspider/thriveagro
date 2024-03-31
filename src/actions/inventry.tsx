@@ -39,3 +39,13 @@ export async function get_all_products_in_inventry(user_id: string) {
     throw e;
   }
 }
+
+export async function get_products_in_inventry() {
+  try {
+    const product = await db.select().from(inventory);
+    return product;
+  } catch (e: any) {
+    console.log(e);
+    throw e;
+  }
+}
