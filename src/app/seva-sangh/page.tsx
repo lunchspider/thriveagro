@@ -8,18 +8,39 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { z } from 'zod';
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export default async function() {
-    const form = useForm()
+const formSchema = z.object({
+    name: z.string().min(2).max(50),
+    issue: z.string().min(2).max(50),
+    location: z.string().min(2).max(50),
+    date: z.date(),
+});
+
+export default function() {
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: '',
+            issue: '',
+            location: '',
+            date: new Date(),
+        },
+    });
+
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values)
+    }
 
     return (
         <div className="flex flex-col w-full h-screen items-center justify-center">
             <Form {...form}>
-                <form>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                         control={form.control}
-                        name="..."
+                        name="issue"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Your Issue</FormLabel>
@@ -36,15 +57,15 @@ export default async function() {
 
                     <FormField
                         control={form.control}
-                        name="..."
+                        name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Your name</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="shadcn" {...field} />
+                                    <Input placeholder="Your name" {...field} />
                                 </FormControl>
                                 <FormDescription>
-                                    This is your public display name.
+                                    This is your Full Name.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
@@ -54,37 +75,45 @@ export default async function() {
 
                     <FormField
                         control={form.control}
+                        name="location"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Location</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Location" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    This is your location.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
                         name="date"
                         render={({ field }) => (
                             <FormItem className="flex flex-col">
                                 <FormLabel>Date</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
-                                        <FormControl>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-[240px] pl-3 text-left font-normal",
-                                                    !field.value && "text-muted-foreground"
-                                                )}
-                                            >
-                                                {field.value ? (
-                                                    format(field.value, "PPP")
-                                                ) : (
-                                                    <span>Pick a date</span>
-                                                )}
-                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                            </Button>
-                                        </FormControl>
+                                        <Button
+                                            variant={"outline"}
+                                            className={cn(
+                                                "w-[280px] justify-start text-left font-normal",
+                                                !field.value && "text-muted-foreground"
+                                            )}
+                                        >
+                                            <CalendarIcon className="mr-2 h-4 w-4" />
+                                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                                        </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
+                                    <PopoverContent className="w-auto p-0">
                                         <Calendar
                                             mode="single"
                                             selected={field.value}
                                             onSelect={field.onChange}
-                                            disabled={(date) =>
-                                                date > new Date() || date < new Date("1900-01-01")
-                                            }
                                             initialFocus
                                         />
                                     </PopoverContent>

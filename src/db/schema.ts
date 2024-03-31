@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, timestamp, uuid, text, integer, boolean } from "drizzle-orm/pg-core";
+import { pgTable, timestamp, uuid, text, integer, boolean, date } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -44,3 +44,12 @@ export const orders = pgTable("orders", {
 });
 
 export type Order = typeof orders.$inferSelect;
+
+export const complains = pgTable('complains', {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text('name').notNull(),
+  location: text('location').notNull(),
+  date: date('date').notNull(),
+});
+
+export type Complain = typeof complains.$inferSelect;
