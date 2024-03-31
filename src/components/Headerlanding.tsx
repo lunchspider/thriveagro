@@ -32,7 +32,8 @@ const Headerlanding = () => {
       className="fixed left-0 top-0 w-full z-10 ease-in duration-300 bg-white"
     >
       <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white">
-        <Link href="/">
+      <Link className=" flex justify-around items-center"href="/">
+          <img src="/logo.png" alt="logo" width="70" height="40"/>
           <h1 style={{ color: `${textColor}` }} className="font-bold text-4xl">
             ThriveAgro
           </h1>

@@ -7,7 +7,8 @@ const Footer = () => {
       <div className=" px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-white">
           <nav className="flex gap-6">
-            <Link className="text-sm font-medium " href="#">
+            <Link className="flex justify-around items-center text-sm font-medium " href="#">
+              <img src="/logo.png" alt="logo" width="40" height="25"/>
               <h3 className=".font-bold text-xl">ThriveAgro</h3>
             </Link>
           </nav>
