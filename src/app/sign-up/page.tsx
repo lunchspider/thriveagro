@@ -14,6 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 interface userDetails {
   email: string;
@@ -35,11 +37,14 @@ const Page = () => {
     user_type: "",
   });
 
+  const [loading, setLoading] = useState<Boolean>(false);
+
   useEffect(() => {
     console.log(userDetails);
   }, [userDetails]);
 
   async function onSubmit() {
+    setLoading(true);
     try {
       console.log(userDetails);
       const res: response = await signup(userDetails);
@@ -53,6 +58,7 @@ const Page = () => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   }
 
   return (
@@ -170,18 +176,27 @@ const Page = () => {
           </div>
 
           <div>
-            <button
-              onClick={onSubmit}
-              disabled={
-                !userDetails.email ||
-                !userDetails.password_hash ||
-                !userDetails.name ||
-                !userDetails.user_type
-              }
-              className="flex w-full justify-center rounded-md bg-[#000000] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#a16207] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign Up
-            </button>
+            {loading ? (
+              <Button
+                disabled
+                className="flex w-full justify-center rounded-md bg-[#000000] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#a16207] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+              </Button>
+            ) : (
+              <button
+                onClick={onSubmit}
+                disabled={
+                  !userDetails.email ||
+                  !userDetails.password_hash ||
+                  !userDetails.name ||
+                  !userDetails.user_type
+                }
+                className="flex w-full justify-center rounded-md bg-[#000000] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#a16207] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign Up
+              </button>
+            )}
           </div>
         </div>
 
