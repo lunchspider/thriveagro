@@ -1,5 +1,5 @@
 "use server";
-export const revalidate = 0;
+const revalidate = 0;
 import { db } from "@/db";
 import { User, users } from "@/db/schema";
 import { encode, decode } from "jwt-simple";
