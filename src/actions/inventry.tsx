@@ -1,5 +1,5 @@
 "use server";
-
+export const revalidate = 0;
 import { db } from "@/db";
 import { Inventory, inventory } from "@/db/schema";
 import { eq } from "drizzle-orm";
